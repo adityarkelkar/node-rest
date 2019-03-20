@@ -10,5 +10,8 @@
 - Run the command `nam install --save morgan`
 - Morgan package helps us for logging the various requests
 
-### Parsing HTML
-- 
+### Parsing HTML and CORS
+- Run `npm install --save body-parser`
+- Add `body-parser` middleware to your `app.js` for urlencoded and json data
+- Modify the POST methods in `products.js` and `orders.js` to send json data through the request
+- Handle CORS errors by sending headers before hitting the routes in app.js

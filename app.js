@@ -7,13 +7,30 @@ const morgan = require('morgan');
 
 // Handle the routes mentioned in the products.js file
 const productRoutes = require('./api/routes/products');
+const orderRoutes = require('./api/routes/orders');
 
+// Middleware. Functions that have access to the req, res and next objects
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false})); // true allows to parse extended bodies with rich text 
+app.use(bodyParser.json()); // Extract json data which is easily readable
 
-// Use this middleware to handle all requests going to /products from the route defined above
+// Handle CORS, append headers to any response to be sent before we reach the routes
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); // Grant origin access to all incoming requests
+    res.header(
+        "Access-Control-Allow-Headers", 
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    ); // Define which kind of headers we want to accept
+    if(req.method == 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET'); // Methods we want our API to support
+        return res.status(200).json();
+    }
+    next();
+});
+
+// Use these middleware to handle all requests
 app.use('/products', productRoutes);
+app.use('/orders', orderRoutes);
 
 // Error Handling. Handle every request that hits this web app
 app.use((req, res, next) => {

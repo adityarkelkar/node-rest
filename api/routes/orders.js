@@ -4,26 +4,26 @@ const router = express.Router(); // Use the router method of express interface
 // Method to handle GET requests
 router.get('/', (req, res, next) => {
     res.status(200).json({
-        message: "Handling GET requests to /products"
+        message: "Handling GET requests to /orders"
     });
 });
 
-// Method to handle POST requests for products
+// Method to handle POST requests for orders
 router.post('/', (req, res, next) => {
-    const product = {
-        name: req.body.name, // Request body requires a name parameter for the product
-        price: req.body.price // Request body requires a price parameter for the product
+    const order = {
+        orderId: req.body.orderId, // Request body requires a id parameter for the order
+        quantity: req.body.quantity // Request body requires a quantity parameter for the order
     }
     res.status(200).json({
-        message: "Handling POST requests to /products",
-        createdProduct: product // Pass the product object as a part of create product as response parameter
+        message: "Handling POST requests to /orders",
+        createdOrder: order // Pass the order object as a part of create order as response parameter
     });
 });
 
-// :productID, passing variable called productID in the URL
+// :orderID, passing variable called orderID in the URL
 // This will get details of a particular product
-router.get('/:productID', (req, res, next) => {
-    const id = req.params.productID;
+router.get('/:orderID', (req, res, next) => {
+    const id = req.params.orderID;
     if(id == 'special') {
         res.status(100).json({
             message: "You discovered a special. NO value here",
