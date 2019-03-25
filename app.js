@@ -1,6 +1,7 @@
 const express = require('express'); // Require the express script module
 const app = express(); // Create a constant app
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose'); // require the mongoose package for mongodb related operations
 
 // Required for 
 const morgan = require('morgan');
@@ -8,6 +9,15 @@ const morgan = require('morgan');
 // Handle the routes mentioned in the products.js file
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
+const contactRoutes = require('./api/routes/contact');
+
+// mongoose.connect('mongodb+srv://'+process.env.MONGO_USER+':'+process.env.MONGO_PASSWD+'@noderest-klzs4.mongodb.net/test?retryWrites=true', {
+//     useMongoClient: true
+// });
+
+mongoose.connect('mongodb://localhost/products', {
+    useMongoClient: true
+});
 
 // Middleware. Functions that have access to the req, res and next objects
 app.use(morgan('dev'));
@@ -31,6 +41,7 @@ app.use((req, res, next) => {
 // Use these middleware to handle all requests
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
+app.use('/contact', contactRoutes);
 
 // Error Handling. Handle every request that hits this web app
 app.use((req, res, next) => {

@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router(); // Use the router method of express interface
+const mongoose = require('mongoose');
+
+const Product = require('../models/product');
 
 // Method to handle GET requests
 router.get('/', (req, res, next) => {
@@ -10,10 +13,15 @@ router.get('/', (req, res, next) => {
 
 // Method to handle POST requests for products
 router.post('/', (req, res, next) => {
-    const product = {
+    const product = new Products({
+        _id: new mongoose.Types.ObjectId(),
         name: req.body.name, // Request body requires a name parameter for the product
-        price: req.body.price // Request body requires a price parameter for the product
-    }
+        price: req.body.price, // Request body requires a price parameter for the product
+    });
+    product.save().then(result => {
+        console.log(result)
+    })
+    .catch(err => console.log(err));
     res.status(200).json({
         message: "Handling POST requests to /products",
         createdProduct: product // Pass the product object as a part of create product as response parameter

@@ -9,3 +9,4 @@
 dist/docs/
 package-lock.json
 /dist
+nodemon.json

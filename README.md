@@ -15,3 +15,7 @@
 - Add `body-parser` middleware to your `app.js` for urlencoded and json data
 - Modify the POST methods in `products.js` and `orders.js` to send json data through the request
 - Handle CORS errors by sending headers before hitting the routes in app.js
+
+### Using MongoDB with mongoose plugin for persistent data
+- Run `npm install --save mongoose` which will import the mongoose plugin
+- We create a models folder and add `products.js` to it. This file will contain a json schema for products
