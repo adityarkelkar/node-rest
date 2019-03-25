@@ -18,4 +18,5 @@
 
 ### Using MongoDB with mongoose plugin for persistent data
 - Run `npm install --save mongoose` which will import the mongoose plugin
-- We create a models folder and add `products.js` to it. This file will contain a json schema for products
+- We create a models folder and add `products.js` and `contact.js` to it. These files will contain a json schema for products and contacts
+- Follow instructions/comments in the file for more details
